@@ -158,3 +158,35 @@ If you think this implementation is useful for your work, please cite our paper:
 * Latency measurement code is borrowed from the [DDRNet](https://github.com/ydhongHIT/DDRNet).
 * Thanks for their nice contribution.
 
+
+# Additions for Visual Media Report
+
+## Fog dataset
+To replicate the results of the report, in addition to the normal Cityscape dataset as required by the original work the "leftImg8bit_trainval_foggyDBF.zip" needs to be downloaded from the Cityscape website and extracted into the folder /data/cityscapes/leftImg8bit/foggy/ (from prohject root).
+
+The performance on the foggy dataset can then be evaluated by running "python tools/eval.py --cfg configs/cityscapes/pidnet_small_cityscapes_foggy.yaml"
+
+## Generating additional datasets
+
+### Artificial low light conditions
+To generate the artificial low light condition dataset run: 
+```bash
+python tools/darken.py data/cityscapes/leftImg8bit/val/ data/cityscapes/leftImg8bit/dark
+```
+
+The models performance on the dataset can be evaluated by running:
+```bash
+python tools/eval.py --cfg configs/cityscapes/pidnet_small_cityscapes_dark.yaml
+```
+
+### Dehazed data
+To evaluate the performance on the foggy dataset with dehazing preprocessing run:
+```bash
+python tools/dehaze.py -m <method> data/cityscapes/leftImg8bit/val/ data/cityscapes/leftImg8bit/foggy_<method>
+```
+followed by:
+```bash
+python tools/eval.py --cfg configs/cityscapes/pidnet_small_cityscapes_foggy_<method>.yaml
+```
+
+`<method>` defines one of the following tried preprocessing approaches {clahe, dcp, histogram}.
