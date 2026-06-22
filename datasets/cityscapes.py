@@ -40,6 +40,8 @@ class Cityscapes(BaseDataset):
 
         self.files = self.read_files()
 
+        device = torch.device('cpu')
+
         self.label_mapping = {-1: ignore_label, 0: ignore_label, 
                               1: ignore_label, 2: ignore_label, 
                               3: ignore_label, 4: ignore_label, 
@@ -56,7 +58,7 @@ class Cityscapes(BaseDataset):
                                         1.0166, 0.9969, 0.9754, 1.0489,
                                         0.8786, 1.0023, 0.9539, 0.9843, 
                                         1.1116, 0.9037, 1.0865, 1.0955, 
-                                        1.0865, 1.1529, 1.0507]).cuda()
+                                        1.0865, 1.1529, 1.0507]).to(device)
         
         self.bd_dilate_size = bd_dilate_size
     
