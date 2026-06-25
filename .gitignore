@@ -1,0 +1,9 @@
+data/cityscapes/gtFine/
+data/cityscapes/leftImg8bit/
+
+pretrained_models/cityscapes/
+pretrained_models/imagenet/
+
+log/
+
+output/
